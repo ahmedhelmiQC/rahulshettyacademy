@@ -39,7 +39,7 @@ test(`verify to login-${email} /${password} `,async({page})=>{
 }
 
 
-test.only(`add  valid Product ${products}To Cart `,async({page})=>{
+test(`add  valid Product ${products}To Cart `,async({page})=>{
     const loginpage = new LoginPage(page);
     const productspage = new ProductsPage(page);
    
