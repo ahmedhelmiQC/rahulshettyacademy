@@ -1,4 +1,24 @@
 import { test, expect } from '@playwright/test';
+/*import{faker} from "@faker-js/faker";
+export const userdata= {
+      firstName    : faker.person.firstName,
+      lastName     : faker.person.lastName,
+      email        : faker.internet.email,
+      phoneNumber  : faker.string.numeric(10),
+     // Occupation   : string,
+      //genderMale   : string,
+      password     : faker.internet.password,
+}
+
+export const paymentdata={
+
+      creditCard: faker.finance.creditCardNumber,
+      CVVCode         : faker.finance.creditCardCVV,
+      name            : faker.finance.accountName,
+      Coupon          : faker.number.int,
+      country         :"ger",
+      suggescountry   :""
+*/
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/');

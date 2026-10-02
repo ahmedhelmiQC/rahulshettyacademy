@@ -1,6 +1,6 @@
 import { expect, Locator , Page } from "@playwright/test";
 import { BasePage } from "./basePage";
-import{userdata} from "../Data/testdata";
+import userdata from "../TestData/testdata";
 
 export class RegisterPage extends BasePage {
 
@@ -26,7 +26,7 @@ export class RegisterPage extends BasePage {
         this.lastName     = page.getByLabel("Last Name");
         this.email        = page.getByPlaceholder("email@example.com");
         this.phoneNumber  = page.getByPlaceholder("enter your number");
-        this.Occupation   = page.locator("select").filter({hasText:"Engineer"});
+        this.Occupation   = page.getByRole("combobox");
         this.genderMale   = page.getByRole("radio",{name:"Male",exact:true})
         this.password     = page.locator("#userPassword");
         this.confirmPass  = page.getByPlaceholder("Confirm Passsword");
@@ -47,7 +47,7 @@ export class RegisterPage extends BasePage {
         await this.lastName.fill(userdata.lastName);
         await this.email.fill(userdata.email);
         await this.phoneNumber.fill(userdata.phoneNumber);
-        await this.Occupation.click();
+        await this.Occupation.selectOption(userdata.Occupation);
         await this.genderMale.click();
         await this.password.fill(userdata.password);
         await this.confirmPass.fill(userdata.password);
@@ -63,5 +63,6 @@ export class RegisterPage extends BasePage {
     async openLoginPage(){
         await this.loginBtn.click();
     }
+
 
 }

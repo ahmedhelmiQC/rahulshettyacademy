@@ -1,0 +1,46 @@
+ {
+"login": [
+        {
+        "email": "original.ahmed99@gmail.com",
+        "password": "Ahmed@123",
+        "validity": "valid"
+        },
+        {
+        "email": "rahulshettyacademy",
+        "password": "wrong-pass",
+        "validity": "invalid"
+        },
+        {
+        "email": "wei",
+        "password": "Learning",
+        "validity": "invalid"
+        },
+        {
+        "email": " ",
+        "password": " ",
+        "validity": "invalid"
+        }
+  ],
+
+"Products":
+    [
+        "ADIDAS ORIGINAL", 
+        "ZARA COAT 3 ",
+         "iphone 13 pro",
+         "samsung not 8"
+    ],
+
+    
+"payment":
+    {
+    "creditCard"     : "4431 3198 0382 2902",
+    "CVVCode"        : "153",
+    "name"           : "Jazmin Bruen",
+    "Coupon"         : "45564",
+    "country"        :"germ",
+    "suggescountry"  :"Germany"
+     }
+    
+    }
+
+   
