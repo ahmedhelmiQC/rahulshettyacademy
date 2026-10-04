@@ -1,8 +1,10 @@
 import { expect, Locator , Page } from "@playwright/test";
 import { BasePage } from "./basePage";
-import{userdata} from "../Data/testdata";
+import registerdata from "../TestData/data.json";
 
 export class RegisterPage extends BasePage {
+
+    
 
     readonly rigesterLink : Locator;
 
@@ -26,8 +28,8 @@ export class RegisterPage extends BasePage {
         this.lastName     = page.getByLabel("Last Name");
         this.email        = page.getByPlaceholder("email@example.com");
         this.phoneNumber  = page.getByPlaceholder("enter your number");
-        this.Occupation   = page.locator("select").filter({hasText:"Engineer"});
-        this.genderMale   = page.getByRole("radio",{name:"Male",exact:true})
+        this.Occupation   = page.getByRole("combobox");
+        this.genderMale   = page.getByRole("radio",{name:registerdata.Register.gender,exact:true})
         this.password     = page.locator("#userPassword");
         this.confirmPass  = page.getByPlaceholder("Confirm Passsword");
         this.age          = page.getByRole("checkbox");
@@ -42,15 +44,17 @@ export class RegisterPage extends BasePage {
     }
 
     async validRegister(){
+        const register = registerdata.Register;
+
         await this.rigesterLink.click();
-        await this.firstName.fill(userdata.firstName);
-        await this.lastName.fill(userdata.lastName);
-        await this.email.fill(userdata.email);
-        await this.phoneNumber.fill(userdata.phoneNumber);
-        await this.Occupation.click();
+        await this.firstName.fill(register.firstName);
+        await this.lastName.fill(register.lastName);
+        await this.email.fill(register.email);
+        await this.phoneNumber.fill(register.phoneNumber);
+        await this.Occupation.selectOption(register.Occupation);
         await this.genderMale.click();
-        await this.password.fill(userdata.password);
-        await this.confirmPass.fill(userdata.password);
+        await this.password.fill(register.password);
+        await this.confirmPass.fill(register.password);
         await this.age.check();
         await this.rigesterBtn.click();
     }
@@ -63,5 +67,6 @@ export class RegisterPage extends BasePage {
     async openLoginPage(){
         await this.loginBtn.click();
     }
+
 
 }
