@@ -1,22 +1,20 @@
 import{expect, test} from "@playwright/test";
 import { LoginPage } from "../Pages/LoginPage";
 import { ProductsPage } from "../Pages/ProductsPage";
-import {CartPage} from "../pages/CartPage";
+import {CartPage} from "../Pages/CartPage";
 import { PaymentPage } from "../Pages/PaymentPage";
 import loginData from "../TestData/data.json";
 import productsData from "../TestData/data.json";
 
 
-test.use({
-    launchOptions: {slowMo: 500},
-});
+
 
 const logindata = loginData.login;
-const products = productsData.Products[1];
+const product   = productsData.Products;
 
 
 for (const { email, password, validity } of logindata) {
-test(`verify to login-${email} /${password} `,async({page})=>{
+test.only(`verify to login-${email} /${password} `,async({page})=>{
     
     const loginpage = new LoginPage(page);
     
@@ -24,33 +22,45 @@ test(`verify to login-${email} /${password} `,async({page})=>{
     await loginpage.userLogin(email,password);
 
     if(validity.toLocaleLowerCase()==="valid"){
-       await expect(page).toHaveURL(/rahulshettyacademy/!);
+       await expect(page).toHaveURL(/dashboard/!);
     }
     else if (email.trim()==="") {
         await expect(
             page.getByText("*Email is required")
         ).toBeVisible();
         
-    } else 
+    } else if (!email.includes("@")) {
+            await expect(
+                page.getByText("*Enter Valid Email")
+            ).toBeVisible();
+    }
+     else 
           await expect(
-            page.getByText("*Enter Valid Email")
+            page.getByText("*Password is required")
         ).toBeVisible(); 
 })
 }
 
-
-test(`add  valid Product ${products}To Cart `,async({page})=>{
+for (const { name, status } of product){
+test(`add  ${status} Product ${name} To Cart `,async({page})=>{
     const loginpage = new LoginPage(page);
     const productspage = new ProductsPage(page);
    
     await loginpage.open();
     await loginpage.userLogin(logindata[0].email,logindata[0].password);
 
-    await productspage.addProductToCart(page,products);
+    const productCart = productspage.productCard(name);
+
    
-    
-    
-})
+   if(status==="valid"){
+    await expect(productCart).toHaveCount(1);
+    await productspage.addProductToCart(name);
+
+     await expect(page).toHaveURL(/cart/!);
+   }
+   else
+    await expect(productCart).toHaveCount(0);
+})}
 
 
 test("verify user login and buy the product",async({page})=>{
@@ -64,7 +74,7 @@ test("verify user login and buy the product",async({page})=>{
     await loginpage.open();
     await loginpage.userLogin(logindata[0].email,logindata[0].password);
 
-    await productspage.addProductToCart(page,products[0]);
+    await productspage.addProductToCart(product[0].name);
 
     await cart.clickBuyNow();
     

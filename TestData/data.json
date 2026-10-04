@@ -1,4 +1,16 @@
  {
+   "Register":{
+      
+     "firstName"    : "ahmed",
+     "lastName"     : "helmi",
+     "email"        : "test@test.com",
+     "phoneNumber"  : "1234567893",
+     "Occupation"   : "Engineer",
+     "gender"       : "Male",
+     "password"     : "Ahmed@123",
+     "confirmPass"  : "Ahmed@123"  
+
+   },
 "login": [
         {
         "email": "original.ahmed99@gmail.com",
@@ -11,25 +23,27 @@
         "validity": "invalid"
         },
         {
-        "email": "wei",
-        "password": "Learning",
-        "validity": "invalid"
-        },
-        {
         "email": " ",
         "password": " ",
+        "validity": "invalid"
+        },
+         {
+        "email": "original.ahmed99@gmail.com",
+        "password": "",
         "validity": "invalid"
         }
   ],
 
-"Products":
-    [
-        "ADIDAS ORIGINAL", 
-        "ZARA COAT 3 ",
-         "iphone 13 pro",
-         "samsung not 8"
-    ],
-
+"Products":[
+      {
+        "name": "ADIDAS ORIGINAL",
+        "status": "valid"
+     },
+     {
+        "name": "samsung not 8",
+        "status": "invalid"
+     }
+  ],
     
 "payment":
     {

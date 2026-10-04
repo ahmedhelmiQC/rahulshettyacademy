@@ -19,8 +19,8 @@ export class PaymentPage extends BasePage{
 
     constructor(page:Page){
         super(page);
-        this.creditCard = page.locator(".field").filter({hasText:/Credit Card Number/!}).locator("input");
-        this.CVVCode    = page.locator(".field").filter({hasText:/CVV Code/!}).locator("input");
+        this.creditCard = page.locator(".field").filter({hasText:/Credit Card Number/}).locator("input");
+        this.CVVCode    = page.locator(".field").filter({hasText:/CVV Code/}).locator("input");
         this.name       = page.locator(".field").filter({hasText:"Name on Card"}).locator("input");
         this.Coupon     = page.locator(".field").filter({hasText:"Apply Coupon "}).locator("input");
         this.CouponBtn  = page.getByRole("button",{name:"Apply Coupon"});
@@ -44,6 +44,6 @@ export class PaymentPage extends BasePage{
         await this.country.pressSequentially(payment.country);
         await this.suggescountry.click();
         await this.placeorder.click();
-        expect(this.successMasseg).toContainText("Thankyou for the order.");
+        await expect(this.successMasseg).toContainText("Thankyou for the order.");
     }
 }
