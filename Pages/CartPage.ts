@@ -7,10 +7,10 @@ export class CartPage extends BasePage{
 
     constructor(page:Page){
         super(page);
-        this.CheckoutBtn = page.getByRole("button",{name:"Buy Now"});
+        this.CheckoutBtn = page.getByRole("button", { name: /buy now/i });
     }
 
-    async clickBuyNow(){
+    async clickCheckout(){
         await this.CheckoutBtn.click();
     }
 }

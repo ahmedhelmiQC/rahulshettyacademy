@@ -14,7 +14,7 @@ const product   = productsData.Products;
 
 
 for (const { email, password, validity } of logindata) {
-test.only(`verify to login-${email} /${password} `,async({page})=>{
+test(`verify to login-${email} /${password} `,async({page})=>{
     
     const loginpage = new LoginPage(page);
     
@@ -76,7 +76,7 @@ test("verify user login and buy the product",async({page})=>{
 
     await productspage.addProductToCart(product[0].name);
 
-    await cart.clickBuyNow();
+    await cart.clickCheckout();
     
     await payment.fillPaymentForm();
     
